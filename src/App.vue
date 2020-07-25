@@ -1,28 +1,31 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app>
+    <side-bar-nav v-if="loggedIn"></side-bar-nav>
+    <v-main style="background-color: #F6F7FB !important;">
+      <app-top-bar v-if="loggedIn"></app-top-bar>
+      <router-view/>
+    </v-main>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import SideBarNav from './components/SideBar';
+import AppTopBar from './components/AppTopBar';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  }
-}
-</script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+  components: {
+    SideBarNav,
+    AppTopBar
+  },
+  computed: {
+    ...mapGetters({loggedIn: 'auth/loggedIn'}),
+  },
+
+  data: () => ({
+    //
+  }),
+};
+</script>
