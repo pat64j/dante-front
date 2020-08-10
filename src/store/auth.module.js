@@ -1,9 +1,20 @@
 import AuthService from '../services/auth.service';
 
 const user = JSON.parse(localStorage.getItem('user'));
+const acc = JSON.parse(localStorage.getItem('acc'));
 const initialState = user
-    ? {status: {loggedIn: true}}
-    : {status: {loggedIn: false}}
+    ? {
+        status: {loggedIn: true},
+        account: acc,
+        app_domain: process.env.VUE_APP_URL,
+        app_backend: process.env.VUE_APP_BACKEND_URL
+    }
+    : {
+        status: {loggedIn: false},
+        account: "",
+        app_domain: process.env.VUE_APP_URL,
+        app_backend: process.env.VUE_APP_BACKEND_URL
+    }
 
 export const auth = {
     namespaced: true,
@@ -43,12 +54,23 @@ export const auth = {
                     return Promise.reject(error);
                 }
             )
+        },
+        updateAccount({commit}, user){
+            return AuthService.updateAccount(user).then(
+                response => {
+                    commit('setCurrentAccount', response.data);
+                    return Promise.resolve(response.data)
+                },
+                error => {
+                    return Promise.reject(error);
+                }
+            )
         }
     },
     mutations: {
         setLoginSuccess(state, user) {
             state.status.loggedIn = true;
-            state.user = user;
+            state.account = user.account;
         },
         setLoginFailure(state) {
             state.status.loggedIn = false;
@@ -63,11 +85,23 @@ export const auth = {
         },
         setRegisterFailure(state) {
             state.status.loggedIn = false
-        }
+        },
+        setCurrentAccount(state, user) {
+            state.account = user;
+        },
     },
     getters:{
         loggedIn: (state)=>{
             return state.status.loggedIn;
-        }
+        },
+        currAccount: (state) => {
+            return state.account;
+        },
+        appUrl: (state) => {
+            return state.app_domain;
+        },
+        backendUrl: (state) => {
+            return state.app_backend;
+        },
     }
 }

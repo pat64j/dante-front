@@ -101,7 +101,7 @@ export default {
                     v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) || 'E-mail must be valid',
                 ],
                 password: [
-                    v => v.length >= 4 || 'Min 4 characters',
+                    v => (v && v.length >= 4) || 'Min 4 characters',
                 ]
             }
         };
@@ -116,8 +116,10 @@ export default {
                 return;
             }
             if(this.user.email && this.user.password){
-                // console.log(this.$store);
-                this.login(this.user).then(
+                let formData = new FormData();
+                let rawData = JSON.stringify(this.user);
+                formData.append("data", rawData);
+                this.login(formData).then(
                     ()=>{
                         this.$router.push('/dashboard');
                     },

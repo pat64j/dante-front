@@ -1,39 +1,47 @@
-import axios from 'axios';
-import authHeader from './auth-header'
-
-const API_URL = 'http://127.0.0.1:5000/api/v1/auth/'
+import api from '../axios';
 
 class AuthService {
     async login(user){
-        const response = await axios
-            .post(API_URL + 'login', {
-                email: user.email,
-                password: user.password
-            });
+        const response = await api
+            .post('auth/login', user);
         if (response.status == 200 && response.data.data) {
             localStorage.setItem('user', JSON.stringify(response.data.data));
-            return true;
+            localStorage.setItem('acc', JSON.stringify(response.data.owner));
+            return {user: response.data.data, account: response.data.owner};
         }
         return response.data.error;
     }
     async logout(){
-        const response = await axios
-            .delete(API_URL + 'token-api',{
-                headers: authHeader()
-            });
-        if(response.status == 200){
-            localStorage.removeItem('user')
-        }
+        await api
+            .delete('auth/token-api').then(
+                ()=>{
+                    localStorage.removeItem('user');
+                    localStorage.removeItem('acc');
+                },
+                ()=>{
+                    localStorage.removeItem('user');
+                    localStorage.removeItem('acc');
+                }
+            );
     }
     async register(user){
-        const response = await axios
-            .post(API_URL + 'signup',{
+        const response = await api
+            .post('auth/signup',{
                 first_name: user.first_name,
                 last_name: user.last_name,
                 email: user.email,
                 password: user.password
             })
         console.log(response.data)
+    }
+    async updateAccount(user){
+        const response = await api.put('user',user)
+        if(response.status == 200){
+            localStorage.removeItem('acc');
+            localStorage.setItem('acc', JSON.stringify(response.data.data));
+            return response.data;
+        }
+        return false;
     }
 }
 
