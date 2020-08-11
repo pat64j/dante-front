@@ -6,21 +6,21 @@ class CategoryService{
         if(response.status == 201){
             return response.data;
         }
-        return response.error;
+        return response;
     }
     async get(page){
         const response = await api.get('categories?page='+page);
         if(response.status == 200){
             return response.data;
         }
-        return response.error;
+        return response;
     }
     async put(category_id, category){
         const response = await api.put('category/'+category_id, category);
         if (response.status == 200){
             return response.data;
         }
-        return response.data.message;
+        return response;
     }
 }
 

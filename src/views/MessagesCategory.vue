@@ -90,17 +90,17 @@
           </v-dialog>
         </v-toolbar>
       </template>
-      <template v-slot:item.actions="{ item }">
+      <template v-slot:[`item.actions`]="{ item }">
         <v-icon small class="mr-2" @click="editItem(item)">mdi-pencil</v-icon>
         <v-icon small @click="''">mdi-delete</v-icon>
       </template>
-      <template v-slot:item.c_thumbnail="{ item }">
+      <template v-slot:[`item.c_thumbnail`]="{ item }">
         <v-avatar tile v-if="item.c_thumbnail">
           <img :src="backendUrl + item.c_thumbnail" alt="item thumbnail" />
         </v-avatar>
       </template>
       <template v-slot:no-data>
-        <v-btn color="primary" @click="initialize">Reset</v-btn>
+        <v-btn color="primary" @click="loadCategories">Reset</v-btn>
       </template>
     </v-data-table>
     <div class="text-center">
