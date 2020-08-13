@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login.vue should render the title and the login button 1`] = `
+<v-container-stub tag="div" fluid="true" class="fill-height pa-0">
+  <v-row-stub tag="div" nogutters="true" class="fill-height">
+    <v-col-stub md="5" tag="div" class="d-none d-md-block">
+      <div class="bg-img-wrapper fill-height">
+        <v-row-stub tag="div" nogutters="true">
+          <v-col-stub tag="div" col="12">
+            <div class="top-logo-display"><img src="" contain="" height="150" width="150" class="my-3" style="margin: 0px;">
+              <p class="login-logo">Praise</p>
+              <v-divider-stub dark="true"></v-divider-stub>
+              <div class="lower-side">
+                <p class="first-lower">Alfi</p>
+                <p data-testid="second-lower" class="second-lower">Church app</p>
+              </div>
+            </div>
+          </v-col-stub>
+        </v-row-stub>
+      </div>
+    </v-col-stub>
+    <v-col-stub md="7" tag="div" xs="12">
+      <div class="fill-height d-flex align-center">
+        <v-row-stub tag="div" nogutters="true">
+          <v-col-stub tag="div" col="12">
+            <div class="login-form-wraper">
+              <v-form-stub lazyvalidation="true">
+                <p class="text-center" style="font-size: 12px; color: red;"></p>
+                <v-text-field-stub errorcount="1" errormessages="" messages="" rules="v => !!v || 'Email is required',v => /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(v) || 'E-mail must be valid'" successmessages="" appendicon="mdi-email" backgroundcolor="" dense="true" label="Email" loaderheight="2" clearicon="$clear" outlined="true" rounded="true" type="text" required=""></v-text-field-stub>
+                <v-text-field-stub errorcount="1" errormessages="" messages="" rules="v => v &amp;&amp; v.length >= 4 || 'Min 4 characters'" successmessages="" appendicon="mdi-eye-off" backgroundcolor="" dense="true" hint="At least 4 characters" label="Password" loaderheight="2" clearicon="$clear" outlined="true" rounded="true" type="password" name="input-10-1"></v-text-field-stub>
+                <v-checkbox-stub errorcount="1" errormessages="" messages="" rules="" successmessages="" backgroundcolor="" dense="true" label="Remember me" ripple="true" valuecomparator="function deepEqual(a, b) {
+  if (a === b) return true;
+
+  if (a instanceof Date &amp;&amp; b instanceof Date) {
+    // If the values are Date, they were convert to timestamp with getTime and compare it
+    if (a.getTime() !== b.getTime()) return false;
+  }
+
+  if (a !== Object(a) || b !== Object(b)) {
+    // If the values aren't objects, they were already checked for equality
+    return false;
+  }
+
+  var props = Object.keys(a);
+
+  if (props.length !== Object.keys(b).length) {
+    // Different number of props, don't bother to check
+    return false;
+  }
+
+  return props.every(function (p) {
+    return deepEqual(a[p], b[p]);
+  });
+}" indeterminateicon="$checkboxIndeterminate" officon="$checkboxOff" onicon="$checkboxOn" style="margin-top: 0px;"></v-checkbox-stub>
+                <v-row-stub tag="div">
+                  <v-col-stub tag="div" col="5">
+                    <v-btn-stub color="primary" rounded="true" tag="button" activeclass="" type="button" data-testid="login-button" class="mr-4 pr-10 pl-10">
+                      Login
+                      <v-icon-stub right="" dark="" small="">mdi-arrow-right</v-icon-stub>
+                    </v-btn-stub>
+                  </v-col-stub>
+                  <!---->
+                </v-row-stub>
+              </v-form-stub>
+            </div>
+          </v-col-stub>
+        </v-row-stub>
+      </div>
+    </v-col-stub>
+  </v-row-stub>
+</v-container-stub>
+`;

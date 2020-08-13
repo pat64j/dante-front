@@ -11,7 +11,7 @@
                                 <v-divider dark></v-divider>
                                 <div class="lower-side">
                                     <p class="first-lower">Alfi</p>
-                                    <p class="second-lower">Church app</p>
+                                    <p data-testid="second-lower" class="second-lower">Church app</p>
                                 </div>
                             </div>
                         </v-col>
@@ -53,7 +53,7 @@
                                     <v-checkbox dense style="margin-top:0" v-model="remember_me" label="Remember me" ></v-checkbox>
                                     <v-row>
                                         <v-col col="5">
-                                            <v-btn :disabled="loading" @click="handleLogin" rounded color="primary" class="mr-4 pr-10 pl-10" >
+                                            <v-btn data-testid="login-button" :disabled="loading" @click="handleLogin" rounded color="primary" class="mr-4 pr-10 pl-10" >
                                                 Login
                                                 <v-icon right dark small>mdi-arrow-right</v-icon>
                                             </v-btn>
@@ -68,17 +68,12 @@
                                         </v-col>
                                     </v-row>
                                 </v-form>
-
                             </div>
                         </v-col>
                     </v-row>
                 </div>
             </v-col>
-
-
         </v-row>
-
-
     </v-container>
 </template>
 
