@@ -5,3 +5,4 @@ app = express();
 app.use(serveStatic(join(__dirname, 'dist')));
 const port = process.env.PORT || 8080;
 app.listen(port);
+console.log(`app is listening on port: ${port}`)
