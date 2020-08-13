@@ -15,10 +15,11 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
+    "connect-history-api-fallback": "^1.6.0",
     "core-js": "^3.6.5",
+    "express": "*",
     "flush-promises": "^1.0.2",
     "moment-timezone": "^0.5.31",
-    "express":"*",
     "serve-static": "^1.14.1",
     "vue": "^2.6.11",
     "vue-moment": "^4.1.0",
