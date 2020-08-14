@@ -2,6 +2,7 @@
   <v-data-table
     :headers="headers"
     :items="messageList"
+    :loading="loading"
     sort-by="calories"
     class="elevation-1 mx-5 mb-5 shallow-shadow"
   >
