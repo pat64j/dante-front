@@ -136,17 +136,11 @@ export default {
       c_name: "",
       c_description: "",
       c_thumbnail: "",
-      fat: 0,
-      carbs: 0,
-      protein: 0,
     },
     defaultItem: {
       c_name: "",
       c_description: "",
       c_thumbnail: "",
-      fat: 0,
-      carbs: 0,
-      protein: 0,
     },
     rules: {
       category_name: [(v) => !!v || "First name is required"],
