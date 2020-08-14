@@ -2,7 +2,7 @@ import api from "../axios"
 
 class CategoryService{
     async create(category){
-        const response = await api.post('category', category);
+        const response = await api.post('categories', category);
         if(response.status == 201){
             return response.data;
         }

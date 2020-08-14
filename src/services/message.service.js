@@ -16,7 +16,7 @@ class MessageService{
         return response;
     }
     async postMessage(message){
-        const response = await api.post('message', message);
+        const response = await api.post('messages', message);
         if(response.status == 200){
             return response.data;
         }
