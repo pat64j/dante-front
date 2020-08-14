@@ -116,7 +116,7 @@ export default {
                 formData.append("data", rawData);
                 this.login(formData).then(
                     ()=>{
-                        this.$router.push('/dashboard');
+                        this.$router.push({name: 'settings_profile'});
                     },
                     () => {
                         this.loading = false;
