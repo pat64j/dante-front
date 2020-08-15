@@ -328,6 +328,7 @@ export default {
       fetchMessageCategories: "message/fetchCategories",
       postMessage: "message/post",
       fetchMessages: "message/fetchMessages",
+      updateMessage: "message/update",
     }),
     loadMessages(){
       this.loading = true;
@@ -343,8 +344,8 @@ export default {
       )
     },
     remove(item) {
-      const index = this.messageObj.m_categories.indexOf(item);
-      if (index >= 0) this.messageObj.m_categories.splice(index, 1);
+      const index = this.messageObj.m_categories.findIndex(x => x.id === item.id);
+      if (index >= 0) this.messageObj.m_categories.splice(index,1);
     },
 
     editItem(item) {
@@ -353,11 +354,11 @@ export default {
       this.dialog = true;
     },
 
-    deleteItem(item) {
-      const index = this.desserts.indexOf(item);
-      confirm("Are you sure you want to delete this item?") &&
-        this.desserts.splice(index, 1);
-    },
+    // deleteItem(item) {
+    //   const index = this.desserts.indexOf(item);
+    //   confirm("Are you sure you want to delete this item?") &&
+    //     this.desserts.splice(index, 1);
+    // },
 
     close() {
       this.dialog = false;
@@ -372,7 +373,21 @@ export default {
       if(!this.$refs.video_msg_form.validate()) return;
 
       if (this.editedIndex > -1) {
-        Object.assign(this.desserts[this.editedIndex], this.editedItem);
+        this.loading = true;
+        let formData = new FormData();
+        let rawData = JSON.stringify(this.messageObj);
+        formData.append("file", this.thumbnail);
+        formData.append("data", rawData);
+        this.updateMessage([this.messageObj.id, formData]).then(
+          (res) => {
+            console.log(res);
+            this.loading = false;
+          },
+          (err) => {
+            console.log(err);
+            this.loading = false;
+          }
+        );
       } else {
         this.loading = true;
         let formData = new FormData();

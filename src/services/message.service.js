@@ -17,6 +17,14 @@ class MessageService{
     }
     async postMessage(message){
         const response = await api.post('messages', message);
+        if(response.status == 201){
+            return response.data;
+        }
+        return response;
+    }
+
+    async updateMessage(message){
+        const response = await api.put('message/'+message[0], message[1]);
         if(response.status == 200){
             return response.data;
         }

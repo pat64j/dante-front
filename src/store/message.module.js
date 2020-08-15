@@ -25,7 +25,16 @@ export const message = {
         post({commit}, payload){
             return MessageService.postMessage(payload).then(
                 (res) => {
-                    commit('addMessage', payload)
+                    commit('addMessage', res.data)
+                    return Promise.resolve(res.data);
+                },
+                (err) => {return Promise.reject(err);}
+            );
+        },
+        update({commit}, payload){
+            return MessageService.updateMessage(payload).then(
+                (res) => {
+                    commit('updateMessage', [res.data.id, res.data]);
                     return Promise.resolve(res.data);
                 },
                 (err) => {return Promise.reject(err);}
@@ -53,7 +62,11 @@ export const message = {
         },
         setMessages(state, payload){
             state.messages = payload;
-        }
+        },
+        updateMessage(state, payload){
+            const index = state.messages.findIndex(el => el.id === payload[0]);
+            state.messages.splice(index,1,payload[1])
+        },
     },
     getters:{
         getTypes(state){

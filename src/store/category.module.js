@@ -42,7 +42,7 @@ export const category = {
         },
         updateCategory(state, payload){
             const index = state.categories.findIndex(el => el.id === payload[0]);
-            state.categories.splice(index,1,payload[1])
+            state.categories.splice(index,1,payload[1]);
         }
     },
     getters: {
