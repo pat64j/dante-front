@@ -17,7 +17,7 @@
                 <p class="login-logo">Praise</p>
                 <v-divider dark></v-divider>
                 <div class="lower-side">
-                  <p class="first-lower">Alfi</p>
+                  <p class="first-lower">Alf</p>
                   <p data-testid="second-lower" class="second-lower">
                     Lorem app
                   </p>
