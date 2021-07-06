@@ -11,7 +11,7 @@
         <v-toolbar-title>Video Messages</v-toolbar-title>
         <v-divider class="mx-4" inset vertical></v-divider>
         <v-spacer></v-spacer>
-        <v-dialog v-model="dialog" max-width="500px">
+        <v-dialog :retain-focus="false" v-model="dialog" max-width="500px">
           <template v-slot:activator="{ on, attrs }">
             <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">New Video Message</v-btn>
           </template>
@@ -218,13 +218,26 @@
       </v-toolbar>
     </template>
     <template v-slot:[`item.m_thumbnail`]="{ item }">
-        <v-avatar tile v-if="item.m_thumbnail">
-          <img :src="backendUrl + item.m_thumbnail" alt="item thumbnail" />
-        </v-avatar>
-      </template>
+      <v-avatar tile v-if="item.m_thumbnail">
+        <img :src="backendUrl + item.m_thumbnail" alt="item thumbnail" />
+      </v-avatar>
+    </template>
     <template v-slot:[`item.actions`]="{ item }">
       <v-icon small class="mr-2" @click="editItem(item)">mdi-pencil</v-icon>
-      <v-icon class="mr-2" @click="''">mdi-play</v-icon>
+      <v-dialog :retain-focus="false" v-model="player_dialog" persistent max-width="600">
+        <template v-slot:activator="{ on, attrs }">
+          <v-icon class="mr-2" v-bind="attrs" v-on="on">mdi-play</v-icon>
+        </template>
+        <v-card>
+          <v-card-title class="headline">Use Google's location service?</v-card-title>
+          <v-card-text>Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.</v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="green darken-1" text @click="player_dialog = false">Disagree</v-btn>
+            <v-btn color="green darken-1" text @click="player_dialog = false">Agree</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
       <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
     </template>
     <template v-slot:no-data>
@@ -240,6 +253,7 @@ export default {
   data: () => ({
     loading: false,
     dialog: false,
+    player_dialog: false,
     duration_menu: false,
     thumbnail: [],
     headers: [
@@ -249,7 +263,7 @@ export default {
         sortable: false,
         value: "m_thumbnail",
       },
-      {text: "Title", value: "m_title",},
+      { text: "Title", value: "m_title" },
       { text: "Media type", value: "m_type.t_name" },
       { text: "Duration", value: "m_duration" },
       { text: "Actions", value: "actions", sortable: false },
@@ -284,9 +298,9 @@ export default {
         (v) =>
           (v && v.length >= 1) || "At least one message category is required.",
       ],
-      media_type: [(v)=> v != "" || "Media type is required."],
-      duration: [(v)=> v != "" || "Video duration is required."],
-      link: [(v)=> v != "" || "Video link is required."],
+      media_type: [(v) => v != "" || "Media type is required."],
+      duration: [(v) => v != "" || "Video duration is required."],
+      link: [(v) => v != "" || "Video link is required."],
       thumbnail: [
         (value) =>
           !value ||
@@ -330,7 +344,7 @@ export default {
       fetchMessages: "message/fetchMessages",
       updateMessage: "message/update",
     }),
-    loadMessages(){
+    loadMessages() {
       this.loading = true;
       this.fetchMessages(this.messageObj.is_video).then(
         (res) => {
@@ -338,14 +352,16 @@ export default {
           this.loading = false;
         },
         (err) => {
-          console.log(err)
+          console.log(err);
           this.loading = false;
         }
-      )
+      );
     },
     remove(item) {
-      const index = this.messageObj.m_categories.findIndex(x => x.id === item.id);
-      if (index >= 0) this.messageObj.m_categories.splice(index,1);
+      const index = this.messageObj.m_categories.findIndex(
+        (x) => x.id === item.id
+      );
+      if (index >= 0) this.messageObj.m_categories.splice(index, 1);
     },
 
     editItem(item) {
@@ -370,7 +386,7 @@ export default {
     },
 
     save() {
-      if(!this.$refs.video_msg_form.validate()) return;
+      if (!this.$refs.video_msg_form.validate()) return;
 
       if (this.editedIndex > -1) {
         this.loading = true;
