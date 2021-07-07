@@ -12,7 +12,7 @@ exports[`Login.vue should render the title and the login button 1`] = `
               <v-divider-stub dark="true"></v-divider-stub>
               <div class="lower-side">
                 <p class="first-lower">Alfi</p>
-                <p data-testid="second-lower" class="second-lower">Church app</p>
+                <p data-testid="second-lower" class="second-lower">Lorem app</p>
               </div>
             </div>
           </v-col-stub>
@@ -26,8 +26,8 @@ exports[`Login.vue should render the title and the login button 1`] = `
             <div class="login-form-wraper">
               <v-form-stub lazyvalidation="true">
                 <p class="text-center" style="font-size: 12px; color: red;"></p>
-                <v-text-field-stub errorcount="1" errormessages="" messages="" rules="v => !!v || 'Email is required',v => /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(v) || 'E-mail must be valid'" successmessages="" appendicon="mdi-email" backgroundcolor="" dense="true" label="Email" loaderheight="2" clearicon="$clear" outlined="true" rounded="true" type="text" required=""></v-text-field-stub>
-                <v-text-field-stub errorcount="1" errormessages="" messages="" rules="v => v &amp;&amp; v.length >= 4 || 'Min 4 characters'" successmessages="" appendicon="mdi-eye-off" backgroundcolor="" dense="true" hint="At least 4 characters" label="Password" loaderheight="2" clearicon="$clear" outlined="true" rounded="true" type="password" name="input-10-1"></v-text-field-stub>
+                <v-text-field-stub errorcount="1" errormessages="" messages="" rules="v => !!v || &quot;Email is required&quot;,v => /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(v) || &quot;E-mail must be valid&quot;" successmessages="" appendicon="mdi-email" backgroundcolor="" dense="true" label="Email" loaderheight="2" clearicon="$clear" outlined="true" rounded="true" type="text" required=""></v-text-field-stub>
+                <v-text-field-stub errorcount="1" errormessages="" messages="" rules="v => v &amp;&amp; v.length >= 4 || &quot;Min 4 characters&quot;" successmessages="" appendicon="mdi-eye-off" backgroundcolor="" dense="true" hint="At least 4 characters" label="Password" loaderheight="2" clearicon="$clear" outlined="true" rounded="true" type="password" name="input-10-1"></v-text-field-stub>
                 <v-checkbox-stub errorcount="1" errormessages="" messages="" rules="" successmessages="" backgroundcolor="" dense="true" label="Remember me" ripple="true" valuecomparator="function deepEqual(a, b) {
   if (a === b) return true;
 
